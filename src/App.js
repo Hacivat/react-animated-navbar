@@ -28,7 +28,7 @@ class App extends Component {
             style={{ float: "right" }}
             onClick={e => this.clickHandler(e)}
           />
-          <Buttons
+          <AnimatedNavBar
             sx={-10}
             fx={-10}
             sy={-250}
@@ -47,7 +47,7 @@ class App extends Component {
 }
 export default App;
 
-class Buttons extends Component {
+class AnimatedNavBar extends Component {
   constructor(props) {
     super(props);
     this.state = {
