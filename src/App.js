@@ -52,7 +52,7 @@ class Buttons extends Component {
     super(props);
     this.state = {
       blackScreen: true
-    }
+    };
   }
 
   render() {
@@ -79,9 +79,7 @@ class Buttons extends Component {
       damping: values.damping
     };
 
-
     const defaultStyle = {
-      
       x: this.props.enable ? values.finishPositionX : values.startPositionX,
       y: this.props.enable ? values.finishPositionY : values.startPositionY,
       opacity: this.props.enable ? values.finishOpacity : values.startOpacity,
@@ -104,8 +102,10 @@ class Buttons extends Component {
         : spring(values.startBackgroundOpacity)
     };
 
-
-    if (values.finishBackgroundOpacity === style.backgroundOpacity && !this.props.enable) {
+    if (
+      values.finishBackgroundOpacity === style.backgroundOpacity &&
+      !this.props.enable
+    ) {
       this.setState({
         blackScreen: false
       });
@@ -130,7 +130,11 @@ class Buttons extends Component {
             {this.state.blackScreen ? (
               <div
                 className="black-effect"
-                style={{ opacity: style.backgroundOpacity, width:`${values.blackBackgroundWidth}px`, height: `${values.blackBackgroundHeight}px` }}
+                style={{
+                  opacity: style.backgroundOpacity,
+                  width: `${values.blackBackgroundWidth}px`,
+                  height: `${values.blackBackgroundHeight}px`
+                }}
               />
             ) : (
               ""
