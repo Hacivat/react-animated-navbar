@@ -18,6 +18,8 @@ class App extends Component {
     });
   }
   render() {
+    const navButtons = [["1", "2", "3"], ["4", "5", "6"], ["7", "8", "9"]];
+
     return (
       <React.Fragment>
         <div style={{ width: 350 }}>
@@ -31,14 +33,15 @@ class App extends Component {
           <AnimatedNavBar
             sx={-10}
             fx={-10}
-            sy={-250}
+            sy={50}
             fy={100}
             so={0}
             fo={1}
-            stf={200}
+            stf={300}
             sbo={0}
             fbo={0.2}
             enable={this.state.clicked}
+            buttons={navButtons}
           />
         </div>
       </React.Fragment>
@@ -53,6 +56,9 @@ class AnimatedNavBar extends Component {
     this.state = {
       blackScreen: true
     };
+  }
+  componentWillMount() {
+    this.buttons = this.props.buttons;
   }
 
   render() {
@@ -110,6 +116,13 @@ class AnimatedNavBar extends Component {
         blackScreen: false
       });
     }
+
+    // for (let i = 0; i < buttons.length; i++) {
+    //   for (let j = 0; j < buttons[i].length; j++) {
+    //     console.log(buttons[i][j]);
+    //   }
+    // }
+
     return (
       <Motion
         defaultStyle={{
@@ -140,40 +153,39 @@ class AnimatedNavBar extends Component {
               ""
             )}
             <div
+              className="row"
               style={{
                 WebkitTransform: `translate(${style.x}px, ${style.y}px)`,
-                msTransform: `translate(${style.x}px, ${style.y}px)`
+                msTransform: `translate(${style.x}px, ${style.y}px)`,
               }}
             >
-              <div className="wrapper">
-                <div className="box" style={{ opacity: style.opacity }}>
-                  1
-                </div>
-                <div className="box" style={{ opacity: style.opacity }}>
-                  2
-                </div>
-                <div className="box" style={{ opacity: style.opacity }}>
-                  3
-                </div>
-                <div className="box" style={{ opacity: style.opacity }}>
-                  4
-                </div>
-                <div className="box" style={{ opacity: style.opacity }}>
-                  5
-                </div>
-                <div className="box" style={{ opacity: style.opacity }}>
-                  6
-                </div>
-                <div className="box" style={{ opacity: style.opacity }}>
-                  7
-                </div>
-                <div className="box" style={{ opacity: style.opacity }}>
-                  8
-                </div>
-                <div className="box" style={{ opacity: style.opacity }}>
-                  9
-                </div>
-              </div>
+              <div style={{ opacity: style.opacity }}>{this.buttons[0][0]}</div>
+              <div style={{ opacity: style.opacity }}>{this.buttons[0][1]}</div>
+              <div style={{ opacity: style.opacity }}>{this.buttons[0][2]}</div>
+            </div>
+
+            <div
+              className="row"
+              style={{
+                WebkitTransform: `translate(${style.x}px, ${style.y}px)`,
+                msTransform: `translate(${style.x}px, ${style.y}px)`,
+              }}
+            >
+              <div style={{ opacity: style.opacity }}>{this.buttons[1][0]}</div>
+              <div style={{ opacity: style.opacity }}>{this.buttons[1][1]}</div>
+              <div style={{ opacity: style.opacity }}>{this.buttons[1][2]}</div>
+            </div>
+
+            <div
+              className="row"
+              style={{
+                WebkitTransform: `translate(${style.x}px, ${style.y}px)`,
+                msTransform: `translate(${style.x}px, ${style.y}px)`,
+              }}
+            >
+              <div style={{ opacity: style.opacity }}>{this.buttons[2][0]}</div>
+              <div style={{ opacity: style.opacity }}>{this.buttons[2][1]}</div>
+              <div style={{ opacity: style.opacity }}>{this.buttons[2][2]}</div>
             </div>
           </React.Fragment>
         )}
