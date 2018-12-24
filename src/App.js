@@ -18,6 +18,7 @@ class App extends Component {
     });
   }
   render() {
+    //Butonların tanımlandığı array
     const navButtons = [["1", "2", "3"], ["4", "5", "6"], ["7", "8", "9"]];
 
     return (
@@ -30,6 +31,21 @@ class App extends Component {
             style={{ float: "right" }}
             onClick={e => this.clickHandler(e)}
           />
+
+          {/*
+          -Init Animation- 
+          enable=(boolean)
+          sx= Start position of X
+          fx= Finish position of X
+          sy= Start position of Y
+          fy= Finish position of Y
+          so= Start opacity 
+          fo= Finish opacity 
+          stf= stiffness 
+          sbo= Start background opacity 
+          fbo= Finish background opacity 
+          button= buttons :)
+          */}
           <AnimatedNavBar
             sx={-10}
             fx={-10}
@@ -54,7 +70,7 @@ class AnimatedNavBar extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      blackScreen: true
+      blackScreen: true     //Animasyon sırasındaki arkaplan efekti
     };
   }
   componentWillMount() {
@@ -62,6 +78,7 @@ class AnimatedNavBar extends Component {
   }
 
   render() {
+    //propların tanımlandığı obje
     const values = {
       startPositionX: this.props.sx ? this.props.sx : 0,
       finishPositionX: this.props.fx ? this.props.fx : 0,
@@ -76,15 +93,18 @@ class AnimatedNavBar extends Component {
       blackBackgroundHeight: this.props.bbh ? this.props.bbh : 500,
       blackBackgroundWidth: this.props.bbw ? this.props.bbw : 300
     };
+    //animasyonun ilk evredeki config ayarları (açılış)
     const forwardStyleConfig = {
       stiffness: values.stiffness,
       damping: values.damping
     };
+    //animasyonun son evredeki config ayarları (kapanış)
     const backwardStyleConfig = {
       stiffness: values.stiffness,
       damping: values.damping
     };
 
+    //animasyonun başlamadan önceki ilk halinin tanımlandığı obje
     const defaultStyle = {
       x: this.props.enable ? values.finishPositionX : values.startPositionX,
       y: this.props.enable ? values.finishPositionY : values.startPositionY,
@@ -93,6 +113,8 @@ class AnimatedNavBar extends Component {
         ? values.finishBackgroundOpacity
         : values.startBackgroundOpacity
     };
+
+    //animasyonun son halinin tanımlanığı obje
     const style = {
       x: this.props.enable
         ? spring(values.finishPositionX, forwardStyleConfig)
@@ -108,6 +130,7 @@ class AnimatedNavBar extends Component {
         : spring(values.startBackgroundOpacity)
     };
 
+    //siyah ekran efektinin iptal edildiği kısım
     if (
       values.finishBackgroundOpacity === style.backgroundOpacity &&
       !this.props.enable
@@ -122,6 +145,7 @@ class AnimatedNavBar extends Component {
     //     console.log(buttons[i][j]);
     //   }
     // }
+
 
     return (
       <Motion
@@ -140,6 +164,7 @@ class AnimatedNavBar extends Component {
       >
         {style => (
           <React.Fragment>
+            {/* siyah efektin init edildiği kısım */}
             {this.state.blackScreen ? (
               <div
                 className="black-effect"
@@ -152,6 +177,8 @@ class AnimatedNavBar extends Component {
             ) : (
               ""
             )}
+
+            {/* 1. Satır */}
             <div
               className="row"
               style={{
@@ -164,6 +191,7 @@ class AnimatedNavBar extends Component {
               <div style={{ opacity: style.opacity }}>{this.buttons[0][2]}</div>
             </div>
 
+            {/* 2. Satır */}
             <div
               className="row"
               style={{
@@ -176,6 +204,7 @@ class AnimatedNavBar extends Component {
               <div style={{ opacity: style.opacity }}>{this.buttons[1][2]}</div>
             </div>
 
+            {/* 3. Satır */}
             <div
               className="row"
               style={{
